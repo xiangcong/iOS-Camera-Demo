@@ -83,8 +83,19 @@
 //    if ([self.output.availableRawPhotoPixelFormatTypes containsObject:[NSNumber numberWithUnsignedInteger:kCVPixelFormatType_14Bayer_RGGB]]) { //
 //        NSLog(@"yes");
 //    }
-    AVCapturePhotoSettings *setting = [AVCapturePhotoSettings photoSettingsWithRawPixelFormatType:kCVPixelFormatType_14Bayer_RGGB processedFormat:dict];
-    [self.output capturePhotoWithSettings:setting delegate:self];
+//    AVCapturePhotoSettings *setting = [AVCapturePhotoSettings photoSettingsWithRawPixelFormatType:kCVPixelFormatType_14Bayer_RGGB processedFormat:dict];
+//    [self.output capturePhotoWithSettings:setting delegate:self];
+    
+    
+    AVCaptureManualExposureBracketedStillImageSettings *setting = [AVCaptureManualExposureBracketedStillImageSettings manualExposureSettingsWithExposureDuration:CMTimeMake(5, 100) ISO:400];
+    NSArray *settingArray = @[setting];
+    
+    AVCapturePhotoBracketSettings *settings = [AVCapturePhotoBracketSettings photoBracketSettingsWithRawPixelFormatType:kCVPixelFormatType_14Bayer_RGGB
+                                                                                                        processedFormat:dict
+                                                                                                      bracketedSettings:settingArray];
+    [self.output capturePhotoWithSettings:settings delegate:self];
+    
+    
 }
 
 - (void)captureOutput:(AVCapturePhotoOutput *)output didFinishProcessingPhoto:(AVCapturePhoto *)photo error:(NSError *)error;
