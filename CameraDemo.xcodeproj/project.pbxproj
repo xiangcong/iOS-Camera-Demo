@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A2274FD2213E871D008CCE54 /* DeeplabMobilenet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = A2274FD1213E871D008CCE54 /* DeeplabMobilenet.mlmodel */; };
 		A2274FD6213E8725008CCE54 /* UIImage+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = A2274FD3213E8725008CCE54 /* UIImage+Utils.m */; };
+		A2274FD9213E9DEC008CCE54 /* DeeplabMobilenet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = A2274FD8213E9DEC008CCE54 /* DeeplabMobilenet.mlmodel */; };
 		A27EC4A220BD27AE0044770A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A27EC4A120BD27AE0044770A /* AppDelegate.m */; };
 		A27EC4A520BD27AE0044770A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A27EC4A420BD27AE0044770A /* ViewController.m */; };
 		A27EC4A820BD27AE0044770A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A27EC4A620BD27AE0044770A /* Main.storyboard */; };
@@ -18,9 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A2274FD1213E871D008CCE54 /* DeeplabMobilenet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = DeeplabMobilenet.mlmodel; sourceTree = "<group>"; };
 		A2274FD3213E8725008CCE54 /* UIImage+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Utils.m"; sourceTree = "<group>"; };
 		A2274FD5213E8725008CCE54 /* UIImage+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Utils.h"; sourceTree = "<group>"; };
+		A2274FD8213E9DEC008CCE54 /* DeeplabMobilenet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = DeeplabMobilenet.mlmodel; sourceTree = "<group>"; };
 		A27EC49D20BD27AE0044770A /* CameraDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CameraDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A27EC4A020BD27AE0044770A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A27EC4A120BD27AE0044770A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -63,8 +63,8 @@
 		A27EC49F20BD27AE0044770A /* CameraDemo */ = {
 			isa = PBXGroup;
 			children = (
-				A2274FD1213E871D008CCE54 /* DeeplabMobilenet.mlmodel */,
 				A27EC4A020BD27AE0044770A /* AppDelegate.h */,
+				A2274FD8213E9DEC008CCE54 /* DeeplabMobilenet.mlmodel */,
 				A27EC4A120BD27AE0044770A /* AppDelegate.m */,
 				A27EC4A320BD27AE0044770A /* ViewController.h */,
 				A27EC4A420BD27AE0044770A /* ViewController.m */,
@@ -149,8 +149,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2274FD2213E871D008CCE54 /* DeeplabMobilenet.mlmodel in Sources */,
 				A27EC4A520BD27AE0044770A /* ViewController.m in Sources */,
+				A2274FD9213E9DEC008CCE54 /* DeeplabMobilenet.mlmodel in Sources */,
 				A27EC4B020BD27AF0044770A /* main.m in Sources */,
 				A27EC4A220BD27AE0044770A /* AppDelegate.m in Sources */,
 				A2274FD6213E8725008CCE54 /* UIImage+Utils.m in Sources */,
