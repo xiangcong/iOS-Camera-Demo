@@ -39,6 +39,8 @@ const int classNum = 21;
     self.imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.imageView];
     self.imageView.hidden = YES;
+    self.imageView.alpha = 0.5;
+    self.imageView.contentMode = UIViewContentModeScaleToFill;
     [self.view addSubview:self.button];
     
     // Do any additional setup after loading the view, typically from a nib.
@@ -107,9 +109,11 @@ const int classNum = 21;
 
         AVCapturePhotoSettings *setting = [AVCapturePhotoSettings photoSettingsWithFormat:dict];
         [self.output capturePhotoWithSettings:setting delegate:self];
+        [self.session stopRunning];
+        self.imageView.image = nil;
     }
     else {
-        
+        [self.session startRunning];
     }
     self.imageView.hidden = !self.imageView.hidden;
     
@@ -142,7 +146,7 @@ const int classNum = 21;
     UIGraphicsBeginImageContextWithOptions(size, YES, 0);
     [[UIColor whiteColor] setFill];
     UIRectFill(CGRectMake(0, 0, size.width, size.height));
-    [[UIColor blackColor] setFill];
+    [[UIColor redColor] setFill];
     
     
     NSTimeInterval startTime2 = CACurrentMediaTime();
