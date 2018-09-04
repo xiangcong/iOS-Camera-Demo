@@ -165,7 +165,7 @@ const int classNum = 21;
     
     CGSize size = CGSizeMake(len, len);
     UIGraphicsBeginImageContextWithOptions(size, YES, 0);
-    [[UIColor whiteColor] setFill];
+    [[UIColor colorWithRed:1 green:1 blue:1 alpha:0] setFill];
     UIRectFill(CGRectMake(0, 0, size.width, size.height));
     [[UIColor redColor] setFill];
     
