@@ -24,6 +24,7 @@ const int classNum = 21;
 @property (nonatomic, strong) UIButton *button;
 @property (nonatomic, strong) DeeplabMobilenet* model;
 @property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UIImageView *imageView2;
 @property (nonatomic, assign) BOOL showImage;
 @end
 
@@ -36,14 +37,33 @@ const int classNum = 21;
     [self setupSession];
     [self runSession];
     
-    self.imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    
+    [self.view addSubview:self.imageView2];
     [self.view addSubview:self.imageView];
-    self.imageView.hidden = YES;
-    self.imageView.alpha = 0.5;
-    self.imageView.contentMode = UIViewContentModeScaleToFill;
     [self.view addSubview:self.button];
     
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+- (UIImageView *)imageView;
+{
+    if (!_imageView){
+        _imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+        _imageView.hidden = YES;
+        _imageView.alpha = 0.5;
+        _imageView.contentMode = UIViewContentModeScaleToFill;
+    }
+    return _imageView;
+}
+
+- (UIImageView *)imageView2;
+{
+    if (!_imageView2){
+        _imageView2 = [[UIImageView alloc] initWithFrame:self.view.bounds];
+        _imageView2.hidden = YES;
+        _imageView2.contentMode = UIViewContentModeScaleToFill;
+    }
+    return _imageView2;
 }
 
 - (void)setupCoreMLModel;
@@ -111,13 +131,13 @@ const int classNum = 21;
         [self.output capturePhotoWithSettings:setting delegate:self];
         [self.session stopRunning];
         self.imageView.image = nil;
+        self.imageView2.image = nil;
     }
     else {
         [self.session startRunning];
     }
     self.imageView.hidden = !self.imageView.hidden;
-    
-    
+    self.imageView2.hidden = !self.imageView2.hidden;
 }
 
 - (void)captureOutput:(AVCapturePhotoOutput *)output didFinishProcessingPhoto:(AVCapturePhoto *)photo error:(NSError *)error;
@@ -129,6 +149,7 @@ const int classNum = 21;
                                                    orientation: UIImageOrientationRight];
     UIImage *retImage = [self predictImageScene:portraitImage];
     self.imageView.image = retImage;
+    self.imageView2.image = portraitImage;
     
 }
 
