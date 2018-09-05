@@ -129,7 +129,6 @@ const int classNum = 21;
 
         AVCapturePhotoSettings *setting = [AVCapturePhotoSettings photoSettingsWithFormat:dict];
         [self.output capturePhotoWithSettings:setting delegate:self];
-        [self.session stopRunning];
         self.imageView.image = nil;
         self.imageView2.image = nil;
     }
@@ -142,18 +141,20 @@ const int classNum = 21;
 
 - (void)captureOutput:(AVCapturePhotoOutput *)output didFinishProcessingPhoto:(AVCapturePhoto *)photo error:(NSError *)error;
 {
+    [self.session stopRunning];
     NSData *data = [photo fileDataRepresentation];
     UIImage *image = [UIImage imageWithData:data];
     UIImage * portraitImage = [[UIImage alloc] initWithCGImage: image.CGImage
                                                          scale: 1.0
                                                    orientation: UIImageOrientationRight];
+    NSTimeInterval startTime = CACurrentMediaTime();
     UIImage *retImage = [self predictImageScene:portraitImage];
-    self.imageView.image = retImage;
-    self.imageView2.image = portraitImage;
+    NSLog(@"total cost; %f", CACurrentMediaTime() - startTime);
     
 }
 
 - (UIImage *)predictImageScene:(UIImage *)image {
+//    image = [UIImage imageNamed:@"test.png"];
     UIImage *scaledImage = [image scaleToSize:CGSizeMake(len, len)];
     CVPixelBufferRef buffer = [image pixelBufferFromCGImage:scaledImage];
     DeeplabMobilenetInput *input = [[DeeplabMobilenetInput alloc] initWithInput_1:buffer];
@@ -185,6 +186,7 @@ const int classNum = 21;
             }
             if (maxIdx == 15) {
                 UIRectFill(CGRectMake(i, j, 1, 1));
+//                NSLog(@"%d %d", i, j);
             }
         }
     }
@@ -192,6 +194,10 @@ const int classNum = 21;
     
     UIImage *retImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    
+    self.imageView.image = retImage;
+    self.imageView2.image = scaledImage;
+    
     return retImage;
 }
 
