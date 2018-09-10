@@ -185,7 +185,7 @@ const int classNum = 21;
                 }
             }
             if (maxIdx == 15) {
-                UIRectFill(CGRectMake(i, j, 1, 1));
+                UIRectFill(CGRectMake(i+8, j+5, 1, 1));
 //                NSLog(@"%d %d", i, j);
             }
         }
