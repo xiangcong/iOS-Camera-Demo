@@ -172,21 +172,43 @@ const int classNum = 21;
     
     
     NSTimeInterval startTime2 = CACurrentMediaTime();
+    float ratio = 1.0/8;
     for (int i = 0; i < len; ++i) {
         for (int j = 0; j < len; ++j) {
+            float sourceI = (i + 0.5) * ratio - 0.5;
+            float sourceJ = (j + 0.5) * ratio - 0.5;
+            int i0 = sourceI;
+            int j0 = sourceJ;
+            
+            float ratioX = sourceI - i0;
+            float ratioY = sourceJ - j0;
+            
+            int i1 = i0+1;
+            int j1 = j0+1;
+            j1 = j1 >= len/8 ? len/8 - 1: j1;
+            i1 = i1 >= len/8 ? len/8 - 1: i1;
+            
+            
             int maxIdx = 0;
-            float maxProp = p[i + j*len];
-            for (int k = 1; k < classNum; ++k) {
-                NSUInteger idx = i + j*len + k*len*len;
-                double prop = p[idx];
-                if (maxProp < prop) {
+            double maxProp = 0;
+//            NSLog(@"%d %d %d %d", i0, i1, j0, j1);
+            for (int k = 0; k < classNum; ++k) {
+                //计算双线性差值
+                float valueI0 = p[[self calIdxWithI:i0 J:j0 K:k Len:len] ]*(1-ratioY) + p[[self calIdxWithI:i0 J:j1 K:k Len:len]]*ratioY;
+                float valueI1 = p[[self calIdxWithI:i1 J:j0 K:k Len:len] ]*(1-ratioY) + p[[self calIdxWithI:i1 J:j1 K:k Len:len]]*ratioY;
+                float prop = valueI0*(1-ratioX) + valueI1*ratioX;
+                if (k == 0) {
+                    maxIdx = 0;
                     maxProp = prop;
-                    maxIdx = k;
+                } else {
+                    if (maxProp < prop) {
+                        maxProp = prop;
+                        maxIdx = k;
+                    }
                 }
             }
             if (maxIdx == 15) {
-                UIRectFill(CGRectMake(i+8, j+5, 1, 1));
-//                NSLog(@"%d %d", i, j);
+                UIRectFill(CGRectMake(i, j, 1, 1));
             }
         }
     }
@@ -199,6 +221,13 @@ const int classNum = 21;
     self.imageView2.image = scaledImage;
     
     return retImage;
+}
+
+- (NSUInteger)calIdxWithI:(NSUInteger)i J:(NSUInteger)j K:(NSUInteger)k Len:(NSUInteger)len;
+{
+    len /= 8;
+    NSUInteger ret = i + j*len + k*len*len;
+    return ret;
 }
 
 - (void)didReceiveMemoryWarning {
