@@ -1,2 +1,2 @@
 # iOS-Camera-Demo
-iOS 相机Demo 包括预览和保存及显示照片
+iOS Camera Demo, including preview, take photo
